@@ -1,0 +1,6 @@
+---
+- name: Install mlocate
+  pacman: 
+    name: mlocate
+    state: present
+    update_cache: true

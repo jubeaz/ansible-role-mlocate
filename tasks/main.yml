@@ -1,0 +1,22 @@
+---
+- include_tasks: variables.yml
+- include_tasks: asserts.yml
+
+- include_tasks: ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+- include_tasks: arch.yml
+  when: ansible_distribution == "Archlinux"
+
+- name: restart updatedb
+  service:
+    name: updatedb
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "Archlinux"
+
+- name: restart updatedb timer
+  systemd:
+    name: updatedb.timer
+    state: restarted
+    enabled: true 
+  when: ansible_distribution == "Archlinux"
