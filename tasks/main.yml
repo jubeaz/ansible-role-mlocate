@@ -12,11 +12,11 @@
     name: updatedb
     state: restarted
     enabled: true
-  when: ansible_distribution == "Archlinux"
+  when: ansible_distribution == "Archlinux" and __pacman.changed
 
 - name: restart updatedb timer
   systemd:
     name: updatedb.timer
     state: restarted
     enabled: true 
-  when: ansible_distribution == "Archlinux"
+  when: ansible_distribution == "Archlinux" and __pacman.changed
